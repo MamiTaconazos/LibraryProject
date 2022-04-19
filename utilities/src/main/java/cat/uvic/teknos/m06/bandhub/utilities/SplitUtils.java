@@ -3,7 +3,7 @@
  */
 package cat.uvic.teknos.m06.bandhub.utilities;
 
-import cat.uvic.teknos.m06.bandhub.list.LinkedList;
+import cat.uvic.teknos.m06.bandhub.domain.LinkedList;
 
 class SplitUtils {
     public static LinkedList split(String source) {

@@ -3,7 +3,7 @@
  */
 package cat.uvic.teknos.m06.bandhub.app;
 
-import cat.uvic.teknos.m06.bandhub.list.LinkedList;
+import cat.uvic.teknos.m06.bandhub.domain.LinkedList;
 
 import static cat.uvic.teknos.m06.bandhub.utilities.StringUtils.join;
 import static cat.uvic.teknos.m06.bandhub.utilities.StringUtils.split;
