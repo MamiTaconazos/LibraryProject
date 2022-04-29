@@ -3,19 +3,24 @@
  */
 package cat.uvic.teknos.m06.bandhub.app;
 
-import cat.uvic.teknos.m06.bandhub.domain.LinkedList;
-
-import static cat.uvic.teknos.m06.bandhub.utilities.StringUtils.join;
-import static cat.uvic.teknos.m06.bandhub.utilities.StringUtils.split;
-import static cat.uvic.teknos.m06.bandhub.app.MessageUtils.getMessage;
-
-import org.apache.commons.text.WordUtils;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class App {
-    public static void main(String[] args) {
-        LinkedList tokens;
-        tokens = split(getMessage());
-        String result = join(tokens);
-        System.out.println(WordUtils.capitalize(result));
+    public static void main(String[] args) throws SQLException {
+        try (var connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bandhub_test", "root", null)) {
+            connection.setAutoCommit(false);
+            var preparedStatement = connection.prepareStatement("select id, name from musicalgenre where id = ?");
+
+            preparedStatement.setInt(1, Integer.parseInt(args[0]));
+
+            var resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                System.out.println(
+                        "Id: " + resultSet.getInt("id") + ", Name: " +resultSet.getString("name"));
+            }
+
+            connection.commit();
+        }
     }
 }
