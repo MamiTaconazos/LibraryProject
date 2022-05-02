@@ -3,24 +3,18 @@
  */
 package cat.uvic.teknos.m06.bandhub.app;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import cat.uvic.teknos.m06.bandhub.utilities.SchemaLoader;
+import cat.uvic.teknos.m06.bandhub.utilities.SingleLineCommandSchemaLoader;
+import cat.uvic.teknos.m06.bandhub.utilities.XmlSchemaLoader;
 
 public class App {
-    public static void main(String[] args) throws SQLException {
-        try (var connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bandhub_test", "root", null)) {
-            connection.setAutoCommit(false);
-            var preparedStatement = connection.prepareStatement("select id, name from musicalgenre where id = ?");
+    public static void main(String[] args)  {
 
-            preparedStatement.setInt(1, Integer.parseInt(args[0]));
+        loadSchema(new SingleLineCommandSchemaLoader("dgfhaos", null));
+        loadSchema(new XmlSchemaLoader(""));
+    }
 
-            var resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                System.out.println(
-                        "Id: " + resultSet.getInt("id") + ", Name: " +resultSet.getString("name"));
-            }
-
-            connection.commit();
-        }
+    private static void loadSchema(SchemaLoader schemaloader) {
+       schemaloader.load();
     }
 }
