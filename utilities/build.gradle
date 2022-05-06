@@ -4,7 +4,6 @@
 
 plugins {
     id 'cat.uvic.teknos.m06.bandhub.java-library-conventions'
-
 }
 
 dependencies {

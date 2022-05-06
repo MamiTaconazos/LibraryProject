@@ -1,7 +1,14 @@
 <schema>
     <version>1.0.0</version>
     <commands>
-        <command>create table a</command>
+        <command>
+            CREATE TABLE `band` (
+            `Id` int(11) NOT NULL,
+            `Name` varchar(100) NOT NULL,
+            `FoundedOn` datetime NOT NULL,
+            `Active` tinyint(1) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+        </command>
         <command>create table b</command>
     </commands>
 </schema>
