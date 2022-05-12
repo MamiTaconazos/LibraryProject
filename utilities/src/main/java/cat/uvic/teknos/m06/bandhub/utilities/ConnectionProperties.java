@@ -4,6 +4,12 @@ public class ConnectionProperties {
     private String url;
     private String username;
     private String password;
+     ConnectionProperties(){}
+    ConnectionProperties(String url, String username, String password){
+        this.url = url;
+        this.username = username;
+        this.password = password;
+    }
 
     public String getUrl() {
         return url;
