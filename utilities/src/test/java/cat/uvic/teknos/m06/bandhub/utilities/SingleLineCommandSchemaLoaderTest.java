@@ -8,11 +8,8 @@ class SingleLineCommandSchemaLoaderTest {
 
     @Test
     void load() {
-        var connectionProperties = new ConnectionProperties();
-        connectionProperties.setUrl("jdbc:mysql://localhost:3306/mysql");
-        connectionProperties.setUsername("root");
-
-        var schemaLoader = new SingleLineCommandSchemaLoader("src/test/resources/singleLineSchema.txt", connectionProperties);
+        var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library","root",null);
+        var schemaLoader = new SingleLineCommandSchemaLoader("C:\\Users\\10030108\\Source\\Repos\\LibraryProject\\utilities\\src\\main\\resources\\schema.sql", connectionProperties);
 
         assertDoesNotThrow(() -> {
             schemaLoader.load();
