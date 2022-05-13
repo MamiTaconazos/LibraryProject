@@ -7,7 +7,6 @@ import cat.uvic.teknos.m06.bandhub.utilities.exceptions.SchemaLoaderException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Reader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.DriverManager;
@@ -26,17 +25,30 @@ public class MultiLineCommandSchemaLoader implements SchemaLoader {
     @Override
     public void load() {
         try (var connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
-             var Schema = new BufferedReader(new FileReader(schemaPath, StandardCharsets.UTF_8))
+             var schema = new BufferedReader(new FileReader(schemaPath, StandardCharsets.UTF_8))
         )
         {
-            String sql=Schema.readLine ();
+            String sql=schema.readLine ();
+            String commit="";
             while(sql!=null){
-                sql=Schema.readLine ();
+                commit+=sql+" ";
 
-                if (sql==""){
-                    connection.createStatement().execute(sql);
-            }
+                if (sql.equals("")) {
+                    if (commit == "") {
+                    }
+                    else{
+                        connection.createStatement().executeUpdate(commit);
+                    }
+
+
+                    commit="";
+                }
+                sql=schema.readLine ();
         }
+
+
+
+
 
 
         } catch (SQLException e) {
