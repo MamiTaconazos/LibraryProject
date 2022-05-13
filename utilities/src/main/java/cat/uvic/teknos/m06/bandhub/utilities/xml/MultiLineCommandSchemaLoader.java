@@ -1,38 +1,43 @@
-package cat.uvic.teknos.m06.bandhub.utilities;
+package cat.uvic.teknos.m06.bandhub.utilities.xml;
 
+import cat.uvic.teknos.m06.bandhub.utilities.ConnectionProperties;
+import cat.uvic.teknos.m06.bandhub.utilities.SchemaLoader;
 import cat.uvic.teknos.m06.bandhub.utilities.exceptions.SchemaLoaderException;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Reader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SingleLineCommandSchemaLoader implements SchemaLoader{
+
+public class MultiLineCommandSchemaLoader implements SchemaLoader {
     private final String schemaPath;
     private final ConnectionProperties connectionProperties;
 
-    public SingleLineCommandSchemaLoader(String schemaPath, ConnectionProperties connectionProperties) {
+    public MultiLineCommandSchemaLoader(String schemaPath, ConnectionProperties connectionProperties) {
         this.schemaPath = schemaPath;
         this.connectionProperties = connectionProperties;
     }
 
     @Override
     public void load() {
-        try (var connection = DriverManager.getConnection(
-                connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
-             var statement = connection.createStatement();
-             var inputStream = new BufferedReader(new FileReader(schemaPath, StandardCharsets.UTF_8))
+        try (var connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
+             var Schema = new BufferedReader(new FileReader(schemaPath, StandardCharsets.UTF_8))
         )
         {
-            String sql;
-            while ((sql = inputStream.readLine()) != null) {
-                if (!sql.isEmpty()) {
-                    statement.executeUpdate(sql);
-                }
+            String sql=Schema.readLine ();
+            while(sql!=null){
+                sql=Schema.readLine ();
+
+                if (sql==""){
+                    connection.createStatement().execute(sql);
             }
+        }
+
 
         } catch (SQLException e) {
             throw new SchemaLoaderException("Sql Exception!", e);

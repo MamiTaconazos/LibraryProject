@@ -36,4 +36,8 @@ public class ConnectionProperties {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getProperties(){
+        return url+" "+username+""+password;
+
+    }
 }
