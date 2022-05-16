@@ -40,11 +40,11 @@ public class MultiLineCommandSchemaLoader implements SchemaLoader {
                         connection.createStatement().executeUpdate(commit);
                     }
 
-
                     commit="";
                 }
                 sql=schema.readLine ();
         }
+
 
 
 

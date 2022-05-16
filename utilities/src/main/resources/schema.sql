@@ -38,7 +38,6 @@ create table if not exists sub_genre(
 cod_sub_genre int(5),
 cod_genre int(5),
 primary key (cod_genre),
-
 index id_cod_genre (cod_genre),
 foreign key (cod_genre) references genre(cod_genre)
 );
