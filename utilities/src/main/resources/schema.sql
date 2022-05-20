@@ -60,3 +60,5 @@ cod_postal varchar(25) not null,
 poblation varchar(25) not null,
 phone_num int(9),
 data_birth date);
+
+

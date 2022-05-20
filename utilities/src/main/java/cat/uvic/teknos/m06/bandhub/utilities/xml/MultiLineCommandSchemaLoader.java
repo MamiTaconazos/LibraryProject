@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
+
 public class MultiLineCommandSchemaLoader implements SchemaLoader {
     private final String schemaPath;
     private final ConnectionProperties connectionProperties;
