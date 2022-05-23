@@ -1,11 +1,13 @@
 package cat.uvic.teknos.m06.bandhub.domain.repositories;
 
-import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
-import cat.uvic.teknos.m06.bandhub.domain.models.country;
+        import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
+        import cat.uvic.teknos.m06.bandhub.domain.models.country;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
+
+        import java.sql.Connection;
+        import java.sql.SQLException;
+        import java.util.ArrayList;
+        import java.util.List;
 
 
 public class CountryRepository {
@@ -14,36 +16,34 @@ public class CountryRepository {
     public CountryRepository(Connection connection) {
         this.connection = connection;
     }
-
-
     public void insert(int cod_country,String name ) {
-        try (var preparedStatement = connection.prepareStatement="INSERT INTO country VALUES (?, ?)")) {
+        try (var prepareStatement = connection.prepareStatement("INSERT INTO country VALUES (?, ?)")) {
             country country = null;
             prepareStatement.setInt(1, cod_country);
             prepareStatement.setString(2, name);
-            ps.executeUpdate();
+            prepareStatement.executeUpdate();
 
-            ps.close();
-    }
-    catch (SQLException e) {
+            prepareStatement.close();
+        }
+        catch (SQLException e) {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
 
 
     public void delete(int cod_country) {
-        try (var preparedStatement = connection.prepareStatement="delete from country where cod_coutry= ?")) {
+        try (var prepareStatement = connection.prepareStatement("delete from country where cod_coutry= ?")){
             country country = null;
-            preparedStatement.setInt(1, cod_country);
-                ps.executeUpdate();
+            prepareStatement.setInt(1, cod_country);
+            prepareStatement.executeUpdate();
 
-                ps.close();
-                
+            prepareStatement.close();
+
         }
         catch (SQLException e) {
-                throw new RepositoryException("Exception while executing getAll", e);
-            }
+            throw new RepositoryException("Exception while executing getAll", e);
         }
+    }
 
 
     public country GetById(int id) {
@@ -55,7 +55,7 @@ public class CountryRepository {
             if (resultSet.next()) {
                 country = new country();
 
-                country.setId(resultSet.getInt("cod_country"));
+                country.setCod_country(resultSet.getInt("cod_country"));
                 country.setName(resultSet.getString("name"));
 
             }
@@ -65,5 +65,22 @@ public class CountryRepository {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
-    public List<country> getAll() {return null;}
+    public List<country> getAll() {
+        var countrys = new ArrayList<country>();
+        try (var Statement = connection.createStatement()) {
+
+            var resultSet = Statement.executeQuery("select * from country");
+            while (resultSet.next()) {
+                var country = new country();
+                country.setCod_country(resultSet.getInt("cod_counrty"));
+                country.setName(resultSet.getString("name"));
+                countrys.add(country);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return countrys;
+    }
 }
