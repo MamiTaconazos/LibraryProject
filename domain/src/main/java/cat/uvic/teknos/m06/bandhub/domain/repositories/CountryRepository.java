@@ -61,7 +61,7 @@ public class CountryRepository {
 
 
     public country GetById(int id) {
-        try (var preparedStatement = connection.prepareStatement("select * from country where cod_coutry = ?")) {
+        try (var preparedStatement = connection.prepareStatement("select * from country where 'cod_coutry' = ?")) {
             country country = null;
             preparedStatement.setInt(1, id);
 
@@ -86,7 +86,7 @@ public class CountryRepository {
             var resultSet = Statement.executeQuery("select * from country");
             while (resultSet.next()) {
                 var country = new country();
-                country.setCod_country(resultSet.getInt("cod_counrty"));
+                country.setCod_country(resultSet.getInt("cod_country"));
                 country.setName(resultSet.getString("name"));
                 countrys.add(country);
             }

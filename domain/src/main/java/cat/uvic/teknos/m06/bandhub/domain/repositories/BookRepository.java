@@ -18,8 +18,8 @@ public class BookRepository {
     }
     public void insert(book book ) {
         try (var prepareStatement = connection.prepareStatement("INSERT INTO book VALUES (?, ?)")) {
-            prepareStatement.setString(1, book.getCod_book);
-            prepareStatement.setString(2, book.getTitle);
+            prepareStatement.setInt(1, book.getCod_book());
+            prepareStatement.setString(2, book.getTitle());
 
 
             prepareStatement.executeUpdate();
@@ -30,28 +30,25 @@ public class BookRepository {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
-    public void update(book book, String id){
+    public void update(book book, int id) {
         try (var prepareStatement = connection.prepareStatement("UPDATE book set title=? where cod_book=?")) {
-            book book = null;
-            prepareStatement.setString(1, book.getTitle);
+            prepareStatement.setString(1, book.getTitle());
             prepareStatement.setInt(2, id);
 
 
             prepareStatement.executeUpdate();
 
-            prepareStatement.close();
-        catch (SQLException e) {
-            throw new RepositoryException("Exception while executing update", e);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
 
-    public void delete(String cod) {
+        public void delete(int cod) {
         try (var prepareStatement = connection.prepareStatement("delete from book where cod_book= ?")){
             prepareStatement.setInt(1, cod);
             prepareStatement.executeUpdate();
-
-            prepareStatement.close();
 
         }
         catch (SQLException e) {
@@ -60,10 +57,10 @@ public class BookRepository {
     }
 
 
-    public book GetById(String id) {
+    public book GetById(int  id) {
         try (var preparedStatement = connection.prepareStatement("select * from book where cod_book = ?")) {
             book book = null;
-            preparedStatement.setString(1, id);
+            preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -87,7 +84,7 @@ public class BookRepository {
 
             var resultSet = Statement.executeQuery("select * from book");
             while (resultSet.next()) {
-                book = new book();
+                var book = new book();
                 book.setCod_book(resultSet.getInt("cod_book"));
                 book.setTitle(resultSet.getString("title"));
             }
