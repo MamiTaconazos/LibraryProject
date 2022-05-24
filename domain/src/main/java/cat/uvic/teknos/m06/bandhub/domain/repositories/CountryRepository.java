@@ -29,6 +29,20 @@ public class CountryRepository {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
+    public void update(int cod_country,String name,int id){
+        try (var prepareStatement = connection.prepareStatement("UPDATE country set cod_country=?, name=? where cod_country=?")) {
+            country country = null;
+            prepareStatement.setInt(1, cod_country);
+            prepareStatement.setString(2, name);
+            prepareStatement.setInt(3, id);
+            prepareStatement.executeUpdate();
+
+            prepareStatement.close();
+        }
+        catch (SQLException e) {
+            throw new RepositoryException("Exception while executing getAll", e);
+        }
+    }
 
 
     public void delete(int cod_country) {
@@ -62,11 +76,11 @@ public class CountryRepository {
 
             return country;
         } catch (SQLException e) {
-            throw new RepositoryException("Exception while executing getAll", e);
+            throw new RepositoryException("Exception while executing GetById", e);
         }
     }
     public List<country> getAll() {
-        var countrys = new ArrayList<country>();
+        var countrys = new ArrayList<country>();//ficar dins try i el return tambe haveure si funciona
         try (var Statement = connection.createStatement()) {
 
             var resultSet = Statement.executeQuery("select * from country");
