@@ -46,7 +46,7 @@ public class CountryRepository {
 
 
     public void delete(int cod_country) {
-        try (var prepareStatement = connection.prepareStatement("delete from country where cod_coutry= ?")){
+        try (var prepareStatement = connection.prepareStatement("delete from country where cod_country= ?")){
             country country = null;
             prepareStatement.setInt(1, cod_country);
             prepareStatement.executeUpdate();
@@ -61,7 +61,7 @@ public class CountryRepository {
 
 
     public country GetById(int id) {
-        try (var preparedStatement = connection.prepareStatement("select * from country where 'cod_coutry' = ?")) {
+        try (var preparedStatement = connection.prepareStatement("select * from country where cod_country = ?")) {
             country country = null;
             preparedStatement.setInt(1, id);
 

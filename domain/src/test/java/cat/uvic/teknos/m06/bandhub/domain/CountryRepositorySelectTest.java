@@ -3,6 +3,10 @@ import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
 import cat.uvic.teknos.m06.bandhub.domain.repositories.CountryRepository;
 import cat.uvic.teknos.m06.bandhub.domain.models.country;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +22,7 @@ public class CountryRepositorySelectTest {
         Connection connection= DriverManager.getConnection(connectionProperties.getUrl(),connectionProperties.getUsername(),connectionProperties.getPassword());
         CountryRepository CountryRepository=new CountryRepository(connection);
 
-        System.out.println(CountryRepository.GetById(1));
+        assertTrue (CountryRepository.GetById(1)!=null);
 
 
     }
@@ -30,7 +34,7 @@ public class CountryRepositorySelectTest {
         var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library","root",null);
         Connection connection= DriverManager.getConnection(connectionProperties.getUrl(),connectionProperties.getUsername(),connectionProperties.getPassword());
         CountryRepository CountryRepository=new CountryRepository(connection);
-        System.out.println(CountryRepository.getAll());
+        CountryRepository.getAll();
 
 
 
