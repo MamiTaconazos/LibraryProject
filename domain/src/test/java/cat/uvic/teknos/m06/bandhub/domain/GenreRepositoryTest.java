@@ -1,8 +1,8 @@
 package cat.uvic.teknos.m06.bandhub.domain;
 
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
-import cat.uvic.teknos.m06.bandhub.domain.models.country;
-import cat.uvic.teknos.m06.bandhub.domain.repositories.CountryRepository;
+import cat.uvic.teknos.m06.bandhub.domain.models.genre;
+import cat.uvic.teknos.m06.bandhub.domain.repositories.genreRepository;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -13,14 +13,14 @@ import java.sql.SQLException;
 public class GenreRepositoryTest {
     @Test
      void insert() throws SQLException {
-        country espanya=new country();
-        espanya.setCod_country(2);
-        espanya.setName("andorra");
+        genre g=new genre();
+        g.setCod_genre(1);
+        g.setDescription("xd");
         var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library","root",null);
         Connection connection= DriverManager.getConnection(connectionProperties.getUrl(),connectionProperties.getUsername(),connectionProperties.getPassword());
-        CountryRepository CountryRepository=new CountryRepository(connection);
+        genreRepository genreRepository=new genreRepository(connection);
 
-        CountryRepository.insert(espanya.getCod_country(),espanya.getName());
+        genreRepository.insert(g);
 
 
         }

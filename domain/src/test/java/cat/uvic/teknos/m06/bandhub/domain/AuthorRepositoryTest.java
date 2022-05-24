@@ -18,7 +18,7 @@ public class AuthorRepositoryTest {
         a1.setCod_author("csdc");
         a1.setName("Rick");
         a1.setSurname("riordan");
-        a1.setBirth(new Date());
+        a1.setBirth(new java.sql.Date((new Date()).getTime()));
         a1.setCod_country(1);
         var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library","root",null);
         Connection connection= DriverManager.getConnection(connectionProperties.getUrl(),connectionProperties.getUsername(),connectionProperties.getPassword());
