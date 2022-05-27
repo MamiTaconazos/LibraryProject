@@ -13,18 +13,39 @@ import java.sql.SQLException;
 
 public class CountryRepositoryTest {
     @Test
-     void insert() throws SQLException {
-        country espanya=new country();
+    void insert() throws SQLException {
+        country espanya = new country();
         espanya.setCod_country(2);
         espanya.setName("andorra");
-        var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library","root",null);
-        Connection connection= DriverManager.getConnection(connectionProperties.getUrl(),connectionProperties.getUsername(),connectionProperties.getPassword());
-        CountryRepository CountryRepository=new CountryRepository(connection);
+        var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library", "root", null);
+        Connection connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
+        CountryRepository CountryRepository = new CountryRepository(connection);
 
-        CountryRepository.insert(espanya.getCod_country(),espanya.getName());
+        CountryRepository.insert(espanya.getCod_country(), espanya.getName());
 
-
-        }
 
     }
+
+    @Test
+    void update() throws SQLException {
+        country espanya = new country();
+        espanya.setCod_country(3);
+        espanya.setName("andorra");
+        var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library", "root", null);
+        Connection connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
+        CountryRepository CountryRepository = new CountryRepository(connection);
+
+        CountryRepository.update(espanya.getCod_country(), espanya.getName(),2);
+
+    }
+    @Test
+    void delete() throws SQLException {
+        var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library", "root", null);
+        Connection connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
+        CountryRepository CountryRepository = new CountryRepository(connection);
+
+        CountryRepository.delete(3);
+
+    }
+}
 
