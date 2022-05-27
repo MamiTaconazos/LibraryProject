@@ -44,9 +44,9 @@ public class sub_genreRepository {
     }
 
 
-        public void delete (String cod){
+        public void delete (int cod){
             try (var prepareStatement = connection.prepareStatement("delete from sub_genre where cod_genre= ?")) {
-                prepareStatement.setString(1, cod);
+                prepareStatement.setInt(1, cod);
                 prepareStatement.executeUpdate();
 
                 prepareStatement.close();
@@ -58,10 +58,10 @@ public class sub_genreRepository {
 
 
 
-    public sub_genre GetById(String id) {
+    public sub_genre GetById(int id) {
         try (var preparedStatement = connection.prepareStatement("select * from sub_genre where cod_genre = ?")) {
             sub_genre genre = null;
-            preparedStatement.setString(1, id);
+            preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {

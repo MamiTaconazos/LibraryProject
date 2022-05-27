@@ -3,7 +3,9 @@ package cat.uvic.teknos.m06.bandhub.domain;
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
 import cat.uvic.teknos.m06.bandhub.domain.models.member;
 import cat.uvic.teknos.m06.bandhub.domain.repositories.MemberRepository;
+import cat.uvic.teknos.m06.bandhub.domain.repositories.genreRepository;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,10 +17,10 @@ public class MembreRepositoryTest {
     @Test
      void insert() throws SQLException {
         member m=new member();
-        m.setCod_member(1);
+        m.setCod_member(2);
         m.setName("ferran");
         m.setSurname("vencells");
-        m.setAddress("c'ferrer");
+        m.setAddress("ferrer");
         m.setCod_postal("casca");
         m.setPoblation("esquirol");
         m.setPhone_num(635030302);
@@ -32,5 +34,28 @@ public class MembreRepositoryTest {
 
         }
 
-    }
+   @Test
+   void GetById() throws SQLException {
+
+      var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library", "root", null);
+      Connection connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
+      MemberRepository MemberRepository = new MemberRepository(connection);
+
+      assertTrue(MemberRepository.GetById(2) != null);
+
+
+   }
+
+
+   @Test
+   void getAll() throws SQLException {
+
+      var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library", "root", null);
+      Connection connection = DriverManager.getConnection(connectionProperties.getUrl(), connectionProperties.getUsername(), connectionProperties.getPassword());
+      MemberRepository MemberRepository = new MemberRepository(connection);
+      assertTrue(MemberRepository.getAll() != null);
+
+   }
+}
+
 

@@ -72,7 +72,7 @@ public class ThematicRepository {
 
                 thematic.setCod_book(resultSet.getInt("cod_book"));
                 thematic.setCod_book(resultSet.getInt("cod_genre"));
-                thematic.setTitle(resultSet.getString("title"));
+                thematic.setTitle(resultSet.getString("titel"));
                 thematic.setTitle(resultSet.getString("description"));
 
 
@@ -93,7 +93,7 @@ public class ThematicRepository {
                 var thematic = new thematic();
                 thematic.setCod_book(resultSet.getInt("cod_book"));
                 thematic.setCod_book(resultSet.getInt("cod_genre"));
-                thematic.setTitle(resultSet.getString("title"));
+                thematic.setTitle(resultSet.getString("titel"));
                 thematic.setTitle(resultSet.getString("description"));
             }
 

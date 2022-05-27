@@ -34,7 +34,7 @@ public class CountryRepositorySelectTest {
         var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library","root",null);
         Connection connection= DriverManager.getConnection(connectionProperties.getUrl(),connectionProperties.getUsername(),connectionProperties.getPassword());
         CountryRepository CountryRepository=new CountryRepository(connection);
-        CountryRepository.getAll();
+        assertTrue(CountryRepository.getAll()!=null);
 
 
 
