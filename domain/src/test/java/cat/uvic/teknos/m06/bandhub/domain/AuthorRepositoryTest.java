@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain;
 
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
-import cat.uvic.teknos.m06.bandhub.domain.models.author;
+import cat.uvic.teknos.m06.bandhub.domain.models.Author;
 import cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC.AuthorRepository;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import java.util.Date;
 public class AuthorRepositoryTest {
     @Test
      void insert() throws SQLException {
-        author a1=new author();
+        Author a1=new Author();
         a1.setCod_author("csdc");
         a1.setName("Rick");
         a1.setSurname("riordan");

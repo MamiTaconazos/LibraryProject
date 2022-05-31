@@ -1,8 +1,6 @@
 package cat.uvic.teknos.m06.bandhub.domain.models;
 
-import java.util.Date;
-
-public class thematic {
+public class Thematic {
     private int cod_book;
     private int cod_genre;
     private String title;

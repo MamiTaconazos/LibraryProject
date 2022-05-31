@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC;
 
 import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
-import cat.uvic.teknos.m06.bandhub.domain.models.author;
+import cat.uvic.teknos.m06.bandhub.domain.models.Author;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,7 +17,7 @@ public class AuthorRepository {
         this.connection = connection;
     }
 
-    public void insert(author author ) {
+    public void insert(Author author ) {
         try (var prepareStatement = connection.prepareStatement("INSERT INTO author VALUES (?, ?,?,?,?)")) {
             prepareStatement.setString(1, author.getCod_author());
             prepareStatement.setString(2, author.getName());
@@ -33,7 +33,7 @@ public class AuthorRepository {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
-    public void update(author author, String id) {
+    public void update(Author author, String id) {
         try (var prepareStatement = connection.prepareStatement("UPDATE author set cod_author=?, name=?, surname=?,birth=?,cod_country=? where cod_country=?")) {
             prepareStatement.setString(1, author.getCod_author());
             prepareStatement.setString(2, author.getName());
@@ -66,14 +66,14 @@ public class AuthorRepository {
 
 
 
-    public author GetById(String id) {
+    public Author GetById(String id) {
         try (var preparedStatement = connection.prepareStatement("select * from author where cod_author = ?")) {
-            author author = null;
+            Author author = null;
             preparedStatement.setString(1, id);
 
             var resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                author = new author();
+                author = new Author();
 
                 author.setCod_author(resultSet.getString("cod_author"));
                 author.setName(resultSet.getString("name"));
@@ -89,13 +89,13 @@ public class AuthorRepository {
             throw new RepositoryException("Exception while executing GetById", e);
         }
     }
-    public List<author> getAll() {
-        var authors = new ArrayList<author>();//ficar dins try i el return tambe haveure si funciona
+    public List<Author> getAll() {
+        var authors = new ArrayList<Author>();//ficar dins try i el return tambe haveure si funciona
         try (var Statement = connection.createStatement()) {
 
             var resultSet = Statement.executeQuery("select * from author");
             while (resultSet.next()) {
-                var author = new author();
+                var author = new Author();
                 author.setCod_author(resultSet.getString("cod_author"));
                 author.setName(resultSet.getString("name"));
                 author.setSurname(resultSet.getString("surname"));

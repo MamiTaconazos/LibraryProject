@@ -20,10 +20,9 @@ public class JPACountryRepositoryTest {
     void saveInsert() {
         var countryRepository=new JPACountryRepository(entityManagerFactory);
         var country=new Country();
-        country.setCod_country(5);
         country.setName("Rumania");
         assertDoesNotThrow(() ->{
-            countryRepository.insert(country);
+            countryRepository.save(country);
         });
         assertTrue((country.getCod_country()!=0));
 

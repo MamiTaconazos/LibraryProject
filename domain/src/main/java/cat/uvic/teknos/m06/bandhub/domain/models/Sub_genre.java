@@ -1,20 +1,22 @@
 package cat.uvic.teknos.m06.bandhub.domain.models;
 
-public class genre {
+public class Sub_genre {
     private int cod_genre;
-    private String description;
+    private int cod_sub_genre;
+
     public void setCod_genre(int cod) {
         this.cod_genre = cod;
     }
-    public void setDescription(String d) {
-        this.description = d;
+    public void setCod_sub_genre(int cod) {
+        this.cod_sub_genre = cod;
     }
     public int getCod_genre() {
         return cod_genre;
     }
-    public String getDescription() {
-        return description;
+    public int getCod_sub_genre() {
+        return cod_sub_genre;
     }
+
 
 
 }

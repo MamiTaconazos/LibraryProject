@@ -12,13 +12,13 @@ public class JPACountryRepository implements RepositoriesDo<Country, Integer> {
         this.entityManagerFactory=entityManagerFactory;
     }
 
-    public void insert (Country country){
+    private void insert (Country country){
         var entityManager=entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(country);
         entityManager.getTransaction().commit();
     }
-    public void update(Country country){
+    private void update(Country country){
         var entityManager=entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.merge(country);
@@ -28,6 +28,12 @@ public class JPACountryRepository implements RepositoriesDo<Country, Integer> {
 
     @Override
     public void save(Country model) {
+        if (model.getCod_country()<=0) {
+            insert(model);
+        }
+        else{
+            update(model);
+        }
 
     }
 

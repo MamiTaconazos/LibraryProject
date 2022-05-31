@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain;
 
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
-import cat.uvic.teknos.m06.bandhub.domain.models.sub_genre;
+import cat.uvic.teknos.m06.bandhub.domain.models.Sub_genre;
 import cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC.sub_genreRepository;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class Sub_GenreRepositoryTest {
     @Test
      void insert() throws SQLException {
-        sub_genre sg=new sub_genre();
+        Sub_genre sg=new Sub_genre();
         sg.setCod_genre(1);
         sg.setCod_sub_genre(1);
         var connectionProperties = new ConnectionProperties("jdbc:mysql://localhost:3306/library","root",null);

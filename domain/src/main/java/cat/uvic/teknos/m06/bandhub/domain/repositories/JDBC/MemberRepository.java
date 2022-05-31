@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC;
 
 import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
-import cat.uvic.teknos.m06.bandhub.domain.models.member;
+import cat.uvic.teknos.m06.bandhub.domain.models.Member;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,7 +17,7 @@ public class MemberRepository {
         this.connection = connection;
     }
 
-    public void insert(member member ) {
+    public void insert(Member member ) {
         try (var prepareStatement = connection.prepareStatement("INSERT INTO member VALUES (?,?,?,?,?,?,?,?)")) {
             prepareStatement.setInt(1, member.getCod_member());
             prepareStatement.setString(2, member.getName());
@@ -36,7 +36,7 @@ public class MemberRepository {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
-    public void update(member member, String id) {
+    public void update(Member member, String id) {
         try (var prepareStatement = connection.prepareStatement("UPDATE member set cod_member=?, name=?, surname=?,address=?,cod_postal=?,poblation=?,phone_num=?,data_birth=? where cod_member=?")) {
             prepareStatement.setInt(1, member.getCod_member());
             prepareStatement.setString(2, member.getName());
@@ -71,14 +71,14 @@ public class MemberRepository {
 
 
 
-    public member GetById(String id) {
+    public Member GetById(String id) {
         try (var preparedStatement = connection.prepareStatement("select * from member where cod_member = ?")) {
-            member member = null;
+            Member member = null;
             preparedStatement.setString(1, id);
 
             var resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                member = new member();
+                member = new Member();
 
                 member.setCod_member(resultSet.getInt("cod_member"));
                 member.setName(resultSet.getString("name"));
@@ -97,13 +97,13 @@ public class MemberRepository {
             throw new RepositoryException("Exception while executing GetById", e);
         }
     }
-    public List<member> getAll() {
-        var members = new ArrayList<member>();//ficar dins try i el return tambe haveure si funciona
+    public List<Member> getAll() {
+        var members = new ArrayList<Member>();//ficar dins try i el return tambe haveure si funciona
         try (var Statement = connection.createStatement()) {
 
             var resultSet = Statement.executeQuery("select * from member");
             while (resultSet.next()) {
-                var member = new member();
+                var member = new Member();
                 member.setCod_member(resultSet.getInt("cod_member"));
                 member.setName(resultSet.getString("name"));
                 member.setSurname(resultSet.getString("surname"));

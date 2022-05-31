@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain;
 
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
-import cat.uvic.teknos.m06.bandhub.domain.models.member;
+import cat.uvic.teknos.m06.bandhub.domain.models.Member;
 import cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC.MemberRepository;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ import java.util.Date;
 public class MembreRepositoryTest {
     @Test
      void insert() throws SQLException {
-        member m=new member();
+        Member m=new Member();
         m.setCod_member(1);
         m.setName("ferran");
         m.setSurname("vencells");

@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain.models;
 import java.util.Date;
 
-public class member {
+public class Member {
     private int cod_member;
     private String name;
     private String surname;

@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain;
 
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
-import cat.uvic.teknos.m06.bandhub.domain.models.thematic;
+import cat.uvic.teknos.m06.bandhub.domain.models.Thematic;
 import cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC.ThematicRepository;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class ThematicRepositoryTest {
     @Test
      void insert() throws SQLException {
-        thematic t=new thematic();
+        Thematic t=new Thematic();
         t.setCod_book(1);
         t.setCod_genre(1);
         t.setTitle("dddd");

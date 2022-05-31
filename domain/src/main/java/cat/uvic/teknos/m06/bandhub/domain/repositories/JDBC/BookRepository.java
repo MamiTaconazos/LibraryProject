@@ -1,8 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC;
 
 import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
-import cat.uvic.teknos.m06.bandhub.domain.models.book;
-import java.util.Date;
+import cat.uvic.teknos.m06.bandhub.domain.models.Book;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +15,7 @@ public class BookRepository {
     public BookRepository(Connection connection) {
         this.connection = connection;
     }
-    public void insert(book book ) {
+    public void insert(Book book ) {
         try (var prepareStatement = connection.prepareStatement("INSERT INTO book VALUES (?, ?)")) {
             prepareStatement.setInt(1, book.getCod_book());
             prepareStatement.setString(2, book.getTitle());
@@ -30,7 +29,7 @@ public class BookRepository {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
-    public void update(book book, int id) {
+    public void update(Book book, int id) {
         try (var prepareStatement = connection.prepareStatement("UPDATE book set title=? where cod_book=?")) {
             prepareStatement.setString(1, book.getTitle());
             prepareStatement.setInt(2, id);
@@ -57,14 +56,14 @@ public class BookRepository {
     }
 
 
-    public book GetById(int  id) {
+    public Book GetById(int  id) {
         try (var preparedStatement = connection.prepareStatement("select * from book where cod_book = ?")) {
-            book book = null;
+            Book book = null;
             preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                book = new book();
+                book = new Book();
 
                 book.setCod_book(resultSet.getInt("cod_book"));
                 book.setTitle(resultSet.getString("title"));
@@ -78,13 +77,13 @@ public class BookRepository {
             throw new RepositoryException("Exception while executing GetById", e);
         }
     }
-    public List<book> getAll() {
-        var books = new ArrayList<book>();//ficar dins try i el return tambe haveure si funciona
+    public List<Book> getAll() {
+        var books = new ArrayList<Book>();//ficar dins try i el return tambe haveure si funciona
         try (var Statement = connection.createStatement()) {
 
             var resultSet = Statement.executeQuery("select * from book");
             while (resultSet.next()) {
-                var book = new book();
+                var book = new Book();
                 book.setCod_book(resultSet.getInt("cod_book"));
                 book.setTitle(resultSet.getString("title"));
             }

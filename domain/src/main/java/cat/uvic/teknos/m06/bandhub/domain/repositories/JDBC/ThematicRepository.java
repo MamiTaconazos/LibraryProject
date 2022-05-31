@@ -1,7 +1,7 @@
 package cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC;
 
 import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
-import cat.uvic.teknos.m06.bandhub.domain.models.thematic;
+import cat.uvic.teknos.m06.bandhub.domain.models.Thematic;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ public class ThematicRepository {
     public ThematicRepository(Connection connection) {
         this.connection = connection;
     }
-    public void insert(thematic thematic ) {
+    public void insert(Thematic thematic ) {
         try (var prepareStatement = connection.prepareStatement("INSERT INTO thematic VALUES (?, ?,?,?)")) {
             prepareStatement.setInt(1, thematic.getCod_book());
             prepareStatement.setInt(2, thematic.getCod_genre());
@@ -31,7 +31,7 @@ public class ThematicRepository {
             throw new RepositoryException("Exception while executing getAll", e);
         }
     }
-    public void update(thematic thematic, int id) {
+    public void update(Thematic thematic, int id) {
         try (var prepareStatement = connection.prepareStatement("UPDATE thematic set cod_book=?,cod_genre=?,title=?,description=? where cod_book=?")) {
             prepareStatement.setInt(1, thematic.getCod_book());
             prepareStatement.setInt(2, thematic.getCod_genre());
@@ -61,14 +61,14 @@ public class ThematicRepository {
     }
 
 
-    public thematic GetById(int  id) {
+    public Thematic GetById(int  id) {
         try (var preparedStatement = connection.prepareStatement("select * from thematic where cod_book = ?")) {
-            thematic thematic = null;
+            Thematic thematic = null;
             preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                thematic = new thematic();
+                thematic = new Thematic();
 
                 thematic.setCod_book(resultSet.getInt("cod_book"));
                 thematic.setCod_book(resultSet.getInt("cod_genre"));
@@ -84,13 +84,13 @@ public class ThematicRepository {
             throw new RepositoryException("Exception while executing GetById", e);
         }
     }
-    public List<thematic> getAll() {
-        var thematics = new ArrayList<thematic>();//ficar dins try i el return tambe haveure si funciona
+    public List<Thematic> getAll() {
+        var thematics = new ArrayList<Thematic>();//ficar dins try i el return tambe haveure si funciona
         try (var Statement = connection.createStatement()) {
 
             var resultSet = Statement.executeQuery("select * from thematic");
             while (resultSet.next()) {
-                var thematic = new thematic();
+                var thematic = new Thematic();
                 thematic.setCod_book(resultSet.getInt("cod_book"));
                 thematic.setCod_book(resultSet.getInt("cod_genre"));
                 thematic.setTitle(resultSet.getString("title"));
