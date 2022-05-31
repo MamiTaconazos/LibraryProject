@@ -1,4 +1,4 @@
-package cat.uvic.teknos.m06.bandhub.domain.repositories;
+package cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC;
 
 import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
 import cat.uvic.teknos.m06.bandhub.domain.models.Band;

@@ -2,7 +2,7 @@ package cat.uvic.teknos.m06.bandhub.domain;
 
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
 import cat.uvic.teknos.m06.bandhub.domain.models.member;
-import cat.uvic.teknos.m06.bandhub.domain.repositories.MemberRepository;
+import cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC.MemberRepository;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;

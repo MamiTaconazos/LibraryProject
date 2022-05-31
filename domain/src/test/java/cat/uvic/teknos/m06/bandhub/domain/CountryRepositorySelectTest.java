@@ -1,7 +1,6 @@
 package cat.uvic.teknos.m06.bandhub.domain;
 import cat.uvic.teknos.m06.bandhub.domain.connection.ConnectionProperties;
-import cat.uvic.teknos.m06.bandhub.domain.repositories.CountryRepository;
-import cat.uvic.teknos.m06.bandhub.domain.models.country;
+import cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC.CountryRepository;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CountryRepositorySelectTest {
     @Test

@@ -1,7 +1,7 @@
-package cat.uvic.teknos.m06.bandhub.domain.repositories;
+package cat.uvic.teknos.m06.bandhub.domain.repositories.JDBC;
 
         import cat.uvic.teknos.m06.bandhub.domain.exceptions.RepositoryException;
-        import cat.uvic.teknos.m06.bandhub.domain.models.country;
+        import cat.uvic.teknos.m06.bandhub.domain.models.Country;
 
 
         import java.sql.Connection;
@@ -18,7 +18,7 @@ public class CountryRepository {
     }
     public void insert(int cod_country,String name ) {
         try (var prepareStatement = connection.prepareStatement("INSERT INTO country VALUES (?, ?)")) {
-            country country = null;
+            Country country = null;
             prepareStatement.setInt(1, cod_country);
             prepareStatement.setString(2, name);
             prepareStatement.executeUpdate();
@@ -31,7 +31,7 @@ public class CountryRepository {
     }
     public void update(int cod_country,String name,int id){
         try (var prepareStatement = connection.prepareStatement("UPDATE country set cod_country=?, name=? where cod_country=?")) {
-            country country = null;
+            Country country = null;
             prepareStatement.setInt(1, cod_country);
             prepareStatement.setString(2, name);
             prepareStatement.setInt(3, id);
@@ -47,7 +47,7 @@ public class CountryRepository {
 
     public void delete(int cod_country) {
         try (var prepareStatement = connection.prepareStatement("delete from country where cod_country= ?")){
-            country country = null;
+            Country country = null;
             prepareStatement.setInt(1, cod_country);
             prepareStatement.executeUpdate();
 
@@ -60,14 +60,14 @@ public class CountryRepository {
     }
 
 
-    public country GetById(int id) {
+    public Country GetById(int id) {
         try (var preparedStatement = connection.prepareStatement("select * from country where cod_country = ?")) {
-            country country = null;
+            Country country = null;
             preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                country = new country();
+                country = new Country();
 
                 country.setCod_country(resultSet.getInt("cod_country"));
                 country.setName(resultSet.getString("name"));
@@ -79,13 +79,13 @@ public class CountryRepository {
             throw new RepositoryException("Exception while executing GetById", e);
         }
     }
-    public List<country> getAll() {
-        var countrys = new ArrayList<country>();//ficar dins try i el return tambe haveure si funciona
+    public List<Country> getAll() {
+        var countrys = new ArrayList<Country>();//ficar dins try i el return tambe haveure si funciona
         try (var Statement = connection.createStatement()) {
 
             var resultSet = Statement.executeQuery("select * from country");
             while (resultSet.next()) {
-                var country = new country();
+                var country = new Country();
                 country.setCod_country(resultSet.getInt("cod_country"));
                 country.setName(resultSet.getString("name"));
                 countrys.add(country);
