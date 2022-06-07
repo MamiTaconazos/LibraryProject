@@ -29,19 +29,53 @@ public class JPACountryRepositoryTest {
     }
     @Test
     void saveUpdate(){
+        var countryRepository=new JPACountryRepository(entityManagerFactory);
+        var country=new Country();
+
+        country.setName("Hello");
+        assertDoesNotThrow(()-> {
+            countryRepository.save(country);
+        });
+        var entityManager=entityManagerFactory.createEntityManager();
+        var modifiCountry=entityManager.find(Country.class,7);
+        assertEquals("ole", modifiCountry.getName());
+        entityManager.close();
+
         
     }
 
     @Test
     void delete() {
+        var countryRepository=new JPACountryRepository(entityManagerFactory);
+        var entityManager=entityManagerFactory.createEntityManager();
+        var entityManager1=entityManagerFactory.createEntityManager();
+        var rom=entityManager.find(Country.class, 7);
+
+        assertNotNull(rom);
+
+        assertDoesNotThrow(() -> {countryRepository.delete(7);
+        });
+
+        rom=entityManager1.find(Country.class,7);
+
+        assertNull(rom);
     }
+
 
     @Test
     void getById() {
+        var countryRepository=new JPACountryRepository(entityManagerFactory);
+        var country= countryRepository.GetById(7);
+        assertNotNull(country);
     }
 
     @Test
     void getAll() {
+        var countryRepository=new JPACountryRepository(entityManagerFactory);
+        var country= countryRepository.GetAll();
+        assertNotNull(country);
+        assertTrue(country.size() > 0);
+
     }
 }
 

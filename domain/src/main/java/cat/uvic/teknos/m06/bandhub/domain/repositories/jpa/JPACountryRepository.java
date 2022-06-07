@@ -37,18 +37,32 @@ public class JPACountryRepository implements RepositoriesDo<Country, Integer> {
 
     }
 
+
     @Override
     public void delete(Integer id) {
-
+        var entityManager=entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        var country=GetById(id);
+        if(country!=null) {
+            country= entityManager.merge(country);
+            entityManager.remove(country);
+        }
+        entityManager.getTransaction().commit();
     }
+
+
 
     @Override
     public Country GetById(Integer id) {
-        return null;
+        var entityManager=entityManagerFactory.createEntityManager();
+        return entityManager.find(Country.class,id);
     }
+
 
     @Override
     public List<Country> GetAll() {
-        return null;
+        var entitYManager=entityManagerFactory.createEntityManager();
+        var query=entitYManager.createQuery("SELECT country FROM Country country");
+        return query.getResultList();
     }
 }
