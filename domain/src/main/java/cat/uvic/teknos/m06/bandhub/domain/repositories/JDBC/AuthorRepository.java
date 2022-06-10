@@ -19,7 +19,7 @@ public class AuthorRepository {
 
     public void insert(Author author ) {
         try (var prepareStatement = connection.prepareStatement("INSERT INTO author VALUES (?, ?,?,?,?)")) {
-            prepareStatement.setString(1, author.getCod_author());
+            prepareStatement.setInt(1, author.getCod_author());
             prepareStatement.setString(2, author.getName());
             prepareStatement.setString(3, author.getSurname());
             prepareStatement.setDate(4, (Date) author.getBirth());
@@ -35,7 +35,7 @@ public class AuthorRepository {
     }
     public void update(Author author, String id) {
         try (var prepareStatement = connection.prepareStatement("UPDATE author set cod_author=?, name=?, surname=?,birth=?,cod_country=? where cod_country=?")) {
-            prepareStatement.setString(1, author.getCod_author());
+            prepareStatement.setInt(1, author.getCod_author());
             prepareStatement.setString(2, author.getName());
             prepareStatement.setString(3, author.getSurname());
             prepareStatement.setDate(4, (Date) author.getBirth());
@@ -75,7 +75,7 @@ public class AuthorRepository {
             if (resultSet.next()) {
                 author = new Author();
 
-                author.setCod_author(resultSet.getString("cod_author"));
+                author.setCod_author(resultSet.getInt("cod_author"));
                 author.setName(resultSet.getString("name"));
                 author.setSurname(resultSet.getString("surname"));
                 author.setBirth(resultSet.getDate("birth"));
@@ -96,7 +96,7 @@ public class AuthorRepository {
             var resultSet = Statement.executeQuery("select * from author");
             while (resultSet.next()) {
                 var author = new Author();
-                author.setCod_author(resultSet.getString("cod_author"));
+                author.setCod_author(resultSet.getInt("cod_author"));
                 author.setName(resultSet.getString("name"));
                 author.setSurname(resultSet.getString("surname"));
                 author.setBirth(resultSet.getDate("birth"));

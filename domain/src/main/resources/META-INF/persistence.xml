@@ -3,10 +3,8 @@
         <description> Hibernate JPA videogame-namagement configuration</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!--<class>cat.uvic.teknos.m06.bandhub.domain.models.Band</class>-->
-        <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Author</class>-->
+        <class>cat.uvic.teknos.m06.bandhub.domain.models.Author</class>
          <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Autoria</class>-->
-          <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Band</class>-->
            <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Book</class>-->
             <class>cat.uvic.teknos.m06.bandhub.domain.models.Country</class>
            <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Genre</class>-->

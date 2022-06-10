@@ -15,7 +15,7 @@ public class AuthorRepositoryTest {
     @Test
      void insert() throws SQLException {
         Author a1=new Author();
-        a1.setCod_author("csdc");
+        a1.setCod_author(1);
         a1.setName("Rick");
         a1.setSurname("riordan");
         a1.setBirth(new java.sql.Date((new Date()).getTime()));

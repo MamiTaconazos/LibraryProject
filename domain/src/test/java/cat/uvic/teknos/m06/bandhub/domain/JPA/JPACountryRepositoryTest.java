@@ -31,14 +31,13 @@ public class JPACountryRepositoryTest {
     void saveUpdate(){
         var countryRepository=new JPACountryRepository(entityManagerFactory);
         var country=new Country();
-
         country.setName("Hello");
         assertDoesNotThrow(()-> {
             countryRepository.save(country);
         });
         var entityManager=entityManagerFactory.createEntityManager();
-        var modifiCountry=entityManager.find(Country.class,7);
-        assertEquals("ole", modifiCountry.getName());
+        var modifiedCountry=entityManager.find(Country.class,8);
+        assertEquals("Hello", modifiedCountry.getName());
         entityManager.close();
 
         
