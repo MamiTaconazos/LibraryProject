@@ -5,7 +5,7 @@
 
         <class>cat.uvic.teknos.m06.bandhub.domain.models.Author</class>
          <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Autoria</class>-->
-           <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Book</class>-->
+           <class>cat.uvic.teknos.m06.bandhub.domain.models.Book</class>
             <class>cat.uvic.teknos.m06.bandhub.domain.models.Country</class>
            <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Genre</class>-->
            <!-- <class>cat.uvic.teknos.m06.bandhub.domain.models.Member</class>-->
