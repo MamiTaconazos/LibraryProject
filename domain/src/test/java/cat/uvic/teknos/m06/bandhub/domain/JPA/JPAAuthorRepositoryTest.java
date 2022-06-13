@@ -37,6 +37,7 @@ public class JPAAuthorRepositoryTest {
     void saveUpdate(){
         var authorRepository=new JPAAuthorRepository(entityManagerFactory);
         var author=new Author();
+        author.setCod_author(2);
         author.setName("rick");
         author.setSurname("riordan");
         author.setBirth(new java.sql.Date((new Date()).getTime()));
@@ -45,7 +46,7 @@ public class JPAAuthorRepositoryTest {
             authorRepository.save(author);
         });
         var entityManager=entityManagerFactory.createEntityManager();
-        var modifiedAuthor=entityManager.find(Author.class,3);
+        var modifiedAuthor=entityManager.find(Author.class,2);
         assertEquals("rick", modifiedAuthor.getName());
         entityManager.close();
 

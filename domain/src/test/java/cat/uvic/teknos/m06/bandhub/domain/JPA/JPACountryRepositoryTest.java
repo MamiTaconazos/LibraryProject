@@ -32,11 +32,12 @@ public class JPACountryRepositoryTest {
         var countryRepository=new JPACountryRepository(entityManagerFactory);
         var country=new Country();
         country.setName("Hello");
+        country.setCod_country(2);
         assertDoesNotThrow(()-> {
             countryRepository.save(country);
         });
         var entityManager=entityManagerFactory.createEntityManager();
-        var modifiedCountry=entityManager.find(Country.class,8);
+        var modifiedCountry=entityManager.find(Country.class,2);
         assertEquals("Hello", modifiedCountry.getName());
         entityManager.close();
 

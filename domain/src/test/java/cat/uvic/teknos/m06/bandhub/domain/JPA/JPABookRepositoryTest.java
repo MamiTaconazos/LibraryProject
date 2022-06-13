@@ -33,11 +33,12 @@ public class JPABookRepositoryTest {
         var countryRepository=new JPABookRepository(entityManagerFactory);
         var book=new Book();
         book.setTitle("Hello");
+        book.setCod_book(1);
         assertDoesNotThrow(()-> {
             countryRepository.save(book);
         });
         var entityManager=entityManagerFactory.createEntityManager();
-        var modifiedCountry=entityManager.find(Book.class,2);
+        var modifiedCountry=entityManager.find(Book.class,1);
         assertEquals("Hello", modifiedCountry.getTitle());
         entityManager.close();
 
